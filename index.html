@@ -1,1 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agastya Yogshala | Aatma ka Parmatma se Milan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #C87D67;
+            --secondary: #9FA28B;
+            --accent: #3E2723;
+            --bg: #FFF9F0;
+            --white: #FFFFFF;
+            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta+Sans', sans-serif;
+            background-color: var(--bg);
+            color: var(--accent);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 249, 240, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(200, 125, 103, 0.15);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--accent);
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .cta-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .cta-btn:hover {
+            background-color: #b06a55;
+            transform: translateY(-2px);
+        }
+
+        /* Sections General */
+        section {
+            padding: 120px 10% 80px 10%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+
+        /* Home Page Hero */
+        #home {
+            background: linear-gradient(rgba(62, 39, 35, 0.4), rgba(62, 39, 35, 0.4)), url('https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .hero-content p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+            color: #f0ede6;
+        }
+
+        /* About Page */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            color: #5d4037;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(62, 39, 35, 0.1);
+        }
+
+        /* Teachers Page */
+        .teacher-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 40px;
+            box-shadow: 0 15px 30px rgba(200, 125, 103, 0.1);
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .teacher-img img {
+            width: 100%;
+            border-radius: 15px;
+            object-fit: cover;
+        }
+
+        .teacher-info h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .teacher-info span {
+            color: var(--secondary);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        /* Awards & Gallery Page */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 250px;
+            box-shadow: 0 10px 20px rgba(62, 39, 35, 0.08);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Testimonials Page */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(62, 39, 35, 0.06);
+            position: relative;
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #5d4037;
+        }
+
+        .testimonial-card h4 {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        /* Contact Page */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info-box {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(62, 39, 35, 0.05);
+        }
+
+        .contact-info-box h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .contact-info-box p {
+            margin-bottom: 15px;
+            color: #5d4037;
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-form input, .contact-form textarea {
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #d7ccc8;
+            background: var(--white);
+            font-family: inherit;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: var(--primary);
+        }
+
+        .contact-form button {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .contact-form button:hover {
+            background-color: #b06a55;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--accent);
+            color: var(--white);
+            text-align: center;
+            padding: 40px 10%;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .about-grid, .contact-grid, .teacher-card, .testimonials-grid, .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none;
+            }
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#home" class="logo">Agastya Yogshala</a>
+        <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#teacher">Teacher</a></li>
+            <li><a href="#awards">Awards & Gallery</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a href="#contact" class="cta-btn">Free Trial</a>
+    </nav>
+
+    <section id="home">
+        <div class="hero-content">
+            <h1>Aatma ka Parmatma se Milan</h1>
+            <p>Explore the timeless wisdom of yoga with certified masters. Restore harmony, flexibility, and deep inner peace.</p>
+            <a href="#contact" class="cta-btn" style="padding: 14px 32px; font-size: 1.1rem;">Book Your Free Trial Today</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="section-title">
+            <h2>About Agastya Yogshala</h2>
+            <p>Rooted in tradition, designed for modern wellness</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-text">
+                <h3>Sanctuary of Peace & Healing</h3>
+                <p>Agastya Yogshala is more than just a yoga center; it is a sacred space dedicated to uniting the mind, body, and soul. Through structured classes tailored for all experience levels, we help practitioners unlock physical mobility and emotional calmness.</p>
+                <p>We specialize in therapeutic yoga addressing conditions like sinus, BP, asthma, joint pain, PCOS, and migraine relief through ancient holistic methods.</p>
+            </div>
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1599447421416-3414500d18a5?auto=format&fit=crop&w=800&q=80" alt="Yoga Session">
+            </div>
+        </div>
+    </section>
+
+    <section id="teacher" style="background-color: #f7f1ea;">
+        <div class="section-title">
+            <h2>Meet Your Guide</h2>
+            <p>Learn directly from certified mastery</p>
+        </div>
+        <div class="teacher-card">
+            <div class="teacher-img">
+                <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80" alt="Rishabh Sharma">
+            </div>
+            <div class="teacher-info">
+                <h3>Rishabh Sharma</h3>
+                <span>Certified Yoga Master & Founder</span>
+                <p>With years of deep practice and certification in advanced, therapeutic, and mobility yoga, Rishabh guides each student with personalized attention and detailed pose explanations, ensuring safe and profound growth.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="awards">
+        <div class="section-title">
+            <h2>Awards & Gallery</h2>
+            <p>Moments of dedication, community, and recognition</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600&q=80" alt="Yoga Pose"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?auto=format&fit=crop&w=600&q=80" alt="Meditation Class"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80" alt="Group Practice"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=600&q=80" alt="Certificates Display"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1593810451137-5dc2e25a34cb?auto=format&fit=crop&w=600&q=80" alt="Workshop Event"></div>
+            <div class="gallery-item"><img src="https://images.unsplash.com/photo-1522845738833-2f8c0722eff1?auto=format&fit=crop&w=600&q=80" alt="Community Gathering"></div>
+        </div>
+    </section>
+
+    <section id="testimonials" style="background-color: #f7f1ea;">
+        <div class="section-title">
+            <h2>Voices of Transformation</h2>
+            <p>What our soulful community says about us</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p>"The atmosphere is so peaceful and positive. Personalized attention has made me feel much more flexible, stronger, and mentally refreshed."</p>
+                <h4>- Sunaina Sharma</h4>
+            </div>
+            <div class="testimonial-card">
+                <p>"Structured classes with clear pose explanations. My chronic joint pain has improved drastically since joining Agastya Yogshala."</p>
+                <h4>- Amit Ahlawat</h4>
+            </div>
+            <div class="testimonial-card">
+                <p>"Truly feels like a divine space. Rishabh Sir's guidance in therapeutic yoga brought absolute calm and relief to my daily routine."</p>
+                <h4>- Priya Malik</h4>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="section-title">
+            <h2>Connect With Us</h2>
+            <p>Take the first step toward inner awakening</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info-box">
+                <h3>Agastya Yogshala Branches</h3>
+                <p><strong>Branch 1:</strong> Railway Station Rd, Kath Mandi, Indira Market, Bahadurgarh, Haryana 124507</p>
+                <p><strong>Branch 2:</strong> Omaxe City, Bahadurgarh</p>
+                <p><strong>Phone / WhatsApp:</strong> +91 97292 92025</p>
+                <p><strong>Timing:</strong> Open daily, trials available upon request.</p>
+            </div>
+            <div class="contact-form">
+                <form>
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="tel" placeholder="Phone Number" required>
+                    <textarea rows="4" placeholder="Your Message or Inquiry" required></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Agastya Yogshala. All Rights Reserved. | Designed with soulful aesthetics.</p>
+    </footer>
+
+</body>
+</html>
