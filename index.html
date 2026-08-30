@@ -1,16 +1,16 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agastya Yogshala | Aatma ka Parmatma se Milan</title>
+    <title>Agastya Yogshala</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #C87D67;
-            --secondary: #9FA28B;
-            --accent: #3E2723;
-            --bg: #FFF9F0;
+            --primary: #4A7C59; /* Calm Earthy Ocean Green */
+            --secondary: #688377; /* Muted Sage/Cyan blend */
+            --accent: #2C3E35; /* Deep Natural Dark */
+            --bg: #F4F7F5; /* Soft Calm Background */
             --white: #FFFFFF;
             --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -23,7 +23,7 @@
         }
 
         body {
-            font-family: 'Plus Jakarta+Sans', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg);
             color: var(--accent);
             line-height: 1.6;
@@ -39,14 +39,14 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(255, 249, 240, 0.95);
+            background: rgba(244, 247, 245, 0.95);
             backdrop-filter: blur(10px);
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 5%;
             z-index: 1000;
-            border-bottom: 1px solid rgba(200, 125, 103, 0.15);
+            border-bottom: 1px solid rgba(74, 124, 89, 0.15);
         }
 
         .logo {
@@ -75,6 +75,16 @@
             color: var(--primary);
         }
 
+        /* Mobile Menu Toggle Icon */
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--accent);
+            background: none;
+            border: none;
+        }
+
         .cta-btn {
             background-color: var(--primary);
             color: var(--white);
@@ -86,7 +96,7 @@
         }
 
         .cta-btn:hover {
-            background-color: #b06a55;
+            background-color: #3b6347;
             transform: translateY(-2px);
         }
 
@@ -117,7 +127,7 @@
 
         /* Home Page Hero */
         #home {
-            background: linear-gradient(rgba(62, 39, 35, 0.4), rgba(62, 39, 35, 0.4)), url('https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1920&q=80');
+            background: linear-gradient(rgba(44, 62, 53, 0.5), rgba(44, 62, 53, 0.5)), url('https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
             color: var(--white);
@@ -135,7 +145,7 @@
             font-size: 1.25rem;
             max-width: 700px;
             margin: 0 auto 30px auto;
-            color: #f0ede6;
+            color: #e8f0eb;
         }
 
         /* About Page */
@@ -154,13 +164,13 @@
 
         .about-text p {
             margin-bottom: 15px;
-            color: #5d4037;
+            color: #4a5c53;
         }
 
         .about-img img {
             width: 100%;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(62, 39, 35, 0.1);
+            box-shadow: 0 20px 40px rgba(44, 62, 53, 0.1);
         }
 
         /* Teachers Page */
@@ -171,7 +181,7 @@
             display: grid;
             grid-template-columns: 300px 1fr;
             gap: 40px;
-            box-shadow: 0 15px 30px rgba(200, 125, 103, 0.1);
+            box-shadow: 0 15px 30px rgba(74, 124, 89, 0.08);
             align-items: center;
             max-width: 900px;
             margin: 0 auto;
@@ -208,7 +218,7 @@
             border-radius: 15px;
             overflow: hidden;
             height: 250px;
-            box-shadow: 0 10px 20px rgba(62, 39, 35, 0.08);
+            box-shadow: 0 10px 20px rgba(44, 62, 53, 0.08);
         }
 
         .gallery-item img {
@@ -233,14 +243,14 @@
             background: var(--white);
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(62, 39, 35, 0.06);
+            box-shadow: 0 10px 25px rgba(44, 62, 53, 0.06);
             position: relative;
         }
 
         .testimonial-card p {
             font-style: italic;
             margin-bottom: 20px;
-            color: #5d4037;
+            color: #4a5c53;
         }
 
         .testimonial-card h4 {
@@ -259,7 +269,7 @@
             background: var(--white);
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(62, 39, 35, 0.05);
+            box-shadow: 0 15px 30px rgba(44, 62, 53, 0.05);
         }
 
         .contact-info-box h3 {
@@ -270,7 +280,7 @@
 
         .contact-info-box p {
             margin-bottom: 15px;
-            color: #5d4037;
+            color: #4a5c53;
         }
 
         .contact-form form {
@@ -282,7 +292,7 @@
         .contact-form input, .contact-form textarea {
             padding: 15px;
             border-radius: 10px;
-            border: 1px solid #d7ccc8;
+            border: 1px solid #cbd5cf;
             background: var(--white);
             font-family: inherit;
             outline: none;
@@ -305,7 +315,7 @@
         }
 
         .contact-form button:hover {
-            background-color: #b06a55;
+            background-color: #3b6347;
         }
 
         /* Footer */
@@ -324,6 +334,21 @@
             }
             .nav-links {
                 display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 75px;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                padding: 20px 0;
+                text-align: center;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .menu-toggle {
+                display: block;
             }
             .hero-content h1 {
                 font-size: 2.5rem;
@@ -335,7 +360,8 @@
 
     <nav>
         <a href="#home" class="logo">Agastya Yogshala</a>
-        <ul class="nav-links">
+        <button class="menu-toggle" id="menu-btn">&#9776;</button>
+        <ul class="nav-links" id="nav-links">
             <li><a href="#home" class="active">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#teacher">Teacher</a></li>
@@ -348,7 +374,7 @@
 
     <section id="home">
         <div class="hero-content">
-            <h1>Aatma ka Parmatma se Milan</h1>
+            <h1>Agastya Yogshala</h1>
             <p>Explore the timeless wisdom of yoga with certified masters. Restore harmony, flexibility, and deep inner peace.</p>
             <a href="#contact" class="cta-btn" style="padding: 14px 32px; font-size: 1.1rem;">Book Your Free Trial Today</a>
         </div>
@@ -371,7 +397,7 @@
         </div>
     </section>
 
-    <section id="teacher" style="background-color: #f7f1ea;">
+    <section id="teacher" style="background-color: #eaf2ed;">
         <div class="section-title">
             <h2>Meet Your Guide</h2>
             <p>Learn directly from certified mastery</p>
@@ -403,7 +429,7 @@
         </div>
     </section>
 
-    <section id="testimonials" style="background-color: #f7f1ea;">
+    <section id="testimonials" style="background-color: #eaf2ed;">
         <div class="section-title">
             <h2>Voices of Transformation</h2>
             <p>What our soulful community says about us</p>
@@ -449,8 +475,24 @@
     </section>
 
     <footer>
-        <p>&copy; 2026 Agastya Yogshala. All Rights Reserved. | Designed with soulful aesthetics.</p>
+        <p>&copy; 2026 Agastya Yogshala. All Rights Reserved. | Designed with natural aesthetics.</p>
     </footer>
 
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const navLinks = document.getElementById('nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu on link click for mobile
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+
 </body>
-</html>
+</html>        
