@@ -7,10 +7,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #4A7C59; /* Calm Earthy Ocean Green */
-            --secondary: #688377; /* Muted Sage/Cyan blend */
-            --accent: #2C3E35; /* Deep Natural Dark */
-            --bg: #F4F7F5; /* Soft Calm Background */
+            --primary: #4A7C59; 
+            --secondary: #688377; 
+            --accent: #2C3E35; 
+            --bg: #F4F7F5; 
             --white: #FFFFFF;
             --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -27,10 +27,27 @@
             background-color: var(--bg);
             color: var(--accent);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         h1, h2, h3, .serif-font {
             font-family: 'Playfair Display', serif;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-up {
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         /* Navigation */
@@ -47,6 +64,7 @@
             padding: 20px 5%;
             z-index: 1000;
             border-bottom: 1px solid rgba(74, 124, 89, 0.15);
+            transition: var(--transition);
         }
 
         .logo {
@@ -55,6 +73,11 @@
             color: var(--primary);
             letter-spacing: 1px;
             text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.03);
         }
 
         .nav-links {
@@ -69,13 +92,28 @@
             font-weight: 500;
             font-size: 0.95rem;
             transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
         }
 
         .nav-links a:hover, .nav-links a.active {
             color: var(--primary);
         }
 
-        /* Mobile Menu Toggle Icon */
         .menu-toggle {
             display: none;
             font-size: 1.8rem;
@@ -94,11 +132,13 @@
             font-weight: 500;
             display: inline-block;
             transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(74, 124, 89, 0.3);
         }
 
         .cta-btn:hover {
             background-color: #3b6347;
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 20px rgba(74, 124, 89, 0.4);
         }
 
         /* Sections General */
@@ -128,7 +168,7 @@
 
         /* Home Page Hero */
         #home {
-            background: linear-gradient(rgba(44, 62, 53, 0.5), rgba(44, 62, 53, 0.5)), url('https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1920&q=80');
+            background: linear-gradient(rgba(44, 62, 53, 0.6), rgba(44, 62, 53, 0.6)), url('https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
             color: var(--white);
@@ -140,6 +180,7 @@
             font-size: 3.5rem;
             margin-bottom: 20px;
             font-weight: 600;
+            animation: fadeInUp 1.2s ease forwards;
         }
 
         .hero-content p {
@@ -147,6 +188,7 @@
             max-width: 700px;
             margin: 0 auto 30px auto;
             color: #e8f0eb;
+            animation: fadeInUp 1.4s ease forwards;
         }
 
         /* About Page */
@@ -171,7 +213,12 @@
         .about-img img {
             width: 100%;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(44, 62, 53, 0.1);
+            box-shadow: 0 20px 40px rgba(44, 62, 53, 0.15);
+            transition: transform 0.5s ease;
+        }
+
+        .about-img img:hover {
+            transform: scale(1.02);
         }
 
         /* Teachers Page */
@@ -180,31 +227,45 @@
             border-radius: 20px;
             padding: 40px;
             display: grid;
-            grid-template-columns: 300px 1fr;
+            grid-template-columns: 320px 1fr;
             gap: 40px;
-            box-shadow: 0 15px 30px rgba(74, 124, 89, 0.08);
+            box-shadow: 0 15px 35px rgba(74, 124, 89, 0.1);
             align-items: center;
-            max-width: 900px;
+            max-width: 950px;
             margin: 0 auto;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .teacher-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(74, 124, 89, 0.15);
         }
 
         .teacher-img {
             width: 100%;
-            height: 380px;
+            height: 420px;
             border-radius: 15px;
             overflow: hidden;
-            background: #e1e8e4;
+            background: #2C3E35; /* Dark background so uncropped sides look neat */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .teacher-img img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain; /* Yeh ensure karega ki poori image dikhe bina kate */
             object-position: center;
+            transition: transform 0.5s ease;
+        }
+
+        .teacher-card:hover .teacher-img img {
+            transform: scale(1.03);
         }
 
         .teacher-info h3 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: var(--primary);
             margin-bottom: 5px;
         }
@@ -214,6 +275,11 @@
             font-weight: 600;
             display: block;
             margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .teacher-info p {
+            color: #4a5c53;
         }
 
         /* Awards & Gallery Page */
@@ -239,7 +305,7 @@
         }
 
         .gallery-item:hover img {
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
 
         /* Testimonials Page */
@@ -255,6 +321,12 @@
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(44, 62, 53, 0.06);
             position: relative;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(44, 62, 53, 0.1);
         }
 
         .testimonial-card p {
@@ -280,6 +352,11 @@
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 15px 30px rgba(44, 62, 53, 0.05);
+            transition: transform 0.4s ease;
+        }
+
+        .contact-info-box:hover {
+            transform: translateY(-3px);
         }
 
         .contact-info-box h3 {
@@ -311,6 +388,7 @@
 
         .contact-form input:focus, .contact-form textarea:focus {
             border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.15);
         }
 
         .contact-form button {
@@ -326,6 +404,7 @@
 
         .contact-form button:hover {
             background-color: #3b6347;
+            transform: translateY(-2px);
         }
 
         /* Footer */
@@ -362,6 +441,9 @@
             }
             .hero-content h1 {
                 font-size: 2.5rem;
+            }
+            .teacher-img {
+                height: 350px;
             }
         }
     </style>
