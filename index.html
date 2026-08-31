@@ -482,7 +482,7 @@
                 <p>We specialize in therapeutic yoga addressing conditions like sinus, BP, asthma, joint pain, PCOS, and migraine relief through ancient holistic methods.</p>
             </div>
             <div class="about-img">
-                <img src="https://images.unsplash.com/photo-1599447421416-3414500d18a5?auto=format&fit=crop&w=800&q=80" alt="Yoga Session">
+                <img src="https://cdn.phototourl.com/member/2026-08-31-9e030983-5ca6-4a27-bb1b-8ed7fa9a6bbc.jpg" alt="Yoga Session">
             </div>
         </div>
     </section>
@@ -579,6 +579,7 @@
         // Close menu on link click for mobile
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
+                navLinks.classList.remove('action');
                 navLinks.classList.remove('active');
             });
         });
