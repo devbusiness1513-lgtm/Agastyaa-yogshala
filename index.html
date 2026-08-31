@@ -243,16 +243,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px;
+            padding: 0;
         }
 
         .teacher-img img {
             width: 100%;
             height: auto;
             max-height: 450px;
-            object-fit: contain;
+            object-fit: cover;
             display: block;
-            border-radius: 10px;
+            border-radius: 15px;
             transition: transform 0.5s ease;
         }
 
@@ -494,7 +494,7 @@
         </div>
         <div class="teacher-card">
             <div class="teacher-img">
-                <img src="https://cdn.phototourl.com/free/2026-08-31-ed2013af-3b8b-46ea-8bc1-f728cd9f28e5.jpg" alt="Rishabh Sharma">
+                <img src="https://cdn.phototourl.com/member/2026-08-31-fc96398c-2e84-4be1-9dcf-0c051602c6db.jpg" alt="Rishabh Sharma">
             </div>
             <div class="teacher-info">
                 <h3>Rishabh Sharma</h3>
@@ -514,7 +514,7 @@
             <div class="gallery-item"><img src="https://cdn.phototourl.com/free/2026-08-31-ff6e0255-a490-4c7a-80b3-1487c7c71cc7.jpg" alt="Award & Gallery 2"></div>
             <div class="gallery-item"><img src="https://cdn.phototourl.com/free/2026-08-31-94c6a662-9bb7-440c-bdba-d255f60aac7c.jpg" alt="Award & Gallery 3"></div>
             <div class="gallery-item"><img src="https://cdn.phototourl.com/free/2026-08-31-ea0b0f8f-b4e8-4839-a5fa-29feb58c7ce2.jpg" alt="Award & Gallery 4"></div>
-            <div class="gallery-item"><img src="https://cdn.phototourl.com/member/2026-08-31-00af10b9-f297-4626-ba90-fc9db0cab754.jpg" alt="Award & Gallery 5"></div>
+            <div class="gallery-item"><img src="https://cdn.phototourl.com/member/2026-08-31-27a1fab0-b480-43ae-a33e-2ccc146c574b.jpg" alt="Award & Gallery 5"></div>
             <div class="gallery-item"><img src="https://cdn.phototourl.com/member/2026-08-31-8fe78a9c-db08-4c67-a45a-ac46d3cf89e5.jpg" alt="Award & Gallery 6"></div>
         </div>
     </section>
@@ -578,30 +578,3 @@
 
         // Close menu on link click for mobile
         document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
-        });
-
-        // Scroll Reveal Animation Observer
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal').forEach(section => {
-            observer.observe(section);
-        });
-    </script>
-
-</body>
-</html>
