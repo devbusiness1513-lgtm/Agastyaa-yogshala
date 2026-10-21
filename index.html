@@ -3,606 +3,304 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agastya Yogshala</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>Trust Quiz - Custom Trend</title>
     <style>
-        :root {
-            --primary: #4A7C59; 
-            --secondary: #688377; 
-            --accent: #2C3E35; 
-            --bg: #F4F7F5; 
-            --white: #FFFFFF;
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg);
-            color: var(--accent);
-            line-height: 1.6;
-            overflow-x: hidden;
+            background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
-
-        h1, h2, h3, .serif-font {
-            font-family: 'Playfair Display', serif;
-        }
-
-        /* Scroll Reveal Animation Styles */
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .container {
+            background: #ffffff;
             width: 100%;
-            background: rgba(244, 247, 245, 0.95);
-            backdrop-filter: blur(10px);
+            max-width: 420px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+            padding: 30px 20px;
+        }
+        .screen {
+            display: none;
+        }
+        .screen.active {
+            display: block;
+        }
+        h1, h2 {
+            text-align: center;
+            color: #262626;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dbdbdb;
+            border-radius: 10px;
+            font-size: 14px;
+            outline: none;
+            background: #fafafa;
+        }
+        input[type="text"]:focus, textarea:focus {
+            border-color: #0095f6;
+            background: #fff;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #0095f6;
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background: #0077c2;
+        }
+        .question-box {
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #eee;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 5%;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(74, 124, 89, 0.15);
-            transition: var(--transition);
         }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            letter-spacing: 1px;
-            text-decoration: none;
-            transition: transform 0.3s ease;
+        .question-box span {
+            font-size: 14px;
+            color: #333;
         }
-
-        .logo:hover {
-            transform: scale(1.03);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--accent);
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: var(--transition);
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--primary);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after, .nav-links a.active::after {
-            width: 100%;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--primary);
-        }
-
-        .menu-toggle {
-            display: none;
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: var(--accent);
-            background: none;
+        .delete-btn {
+            background: #ed4956;
+            color: white;
             border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
         }
-
-        .cta-btn {
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 12px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-block;
-            transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(74, 124, 89, 0.3);
-        }
-
-        .cta-btn:hover {
-            background-color: #3b6347;
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 6px 20px rgba(74, 124, 89, 0.4);
-        }
-
-        /* Sections General */
-        section {
-            padding: 120px 10% 80px 10%;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .section-title {
+        .result-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 20px;
             text-align: center;
-            margin-bottom: 50px;
+            border: 2px solid #eee;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
         }
-
-        .section-title h2 {
-            font-size: 2.8rem;
-            color: var(--accent);
+        .avatar-placeholder {
+            font-size: 50px;
             margin-bottom: 10px;
         }
-
-        .section-title p {
-            color: var(--secondary);
-            font-size: 1.1rem;
+        .result-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #262626;
+            margin: 10px 0;
         }
-
-        /* Home Page Hero */
-        #home {
-            background: linear-gradient(rgba(44, 62, 53, 0.6), rgba(44, 62, 53, 0.6)), url('https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            color: var(--white);
-            text-align: center;
-            align-items: center;
+        .result-badge {
+            display: inline-block;
+            background: #8e44ad;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            transform: rotate(-2deg);
         }
-
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        .hero-content p {
-            font-size: 1.25rem;
-            max-width: 700px;
-            margin: 0 auto 30px auto;
-            color: #e8f0eb;
-        }
-
-        /* About Page */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .about-text h3 {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-
-        .about-text p {
+        .link-box {
+            background: #efefef;
+            padding: 10px;
+            border-radius: 8px;
+            word-break: break-all;
+            font-size: 13px;
+            color: #555;
             margin-bottom: 15px;
-            color: #4a5c53;
-        }
-
-        .about-img img {
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(44, 62, 53, 0.15);
-            transition: transform 0.5s ease;
-        }
-
-        .about-img img:hover {
-            transform: scale(1.02);
-        }
-
-        /* Teachers Page */
-        .teacher-card {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 40px;
-            display: grid;
-            grid-template-columns: 320px 1fr;
-            gap: 40px;
-            box-shadow: 0 15px 35px rgba(74, 124, 89, 0.1);
-            align-items: center;
-            max-width: 950px;
-            margin: 0 auto;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .teacher-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 45px rgba(74, 124, 89, 0.15);
-        }
-
-        .teacher-img {
-            width: 100%;
-            background: #2C3E35;
-            border-radius: 15px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0;
-        }
-
-        .teacher-img img {
-            width: 100%;
-            height: auto;
-            max-height: 450px;
-            object-fit: cover;
-            display: block;
-            border-radius: 15px;
-            transition: transform 0.5s ease;
-        }
-
-        .teacher-card:hover .teacher-img img {
-            transform: scale(1.02);
-        }
-
-        .teacher-info h3 {
-            font-size: 2.2rem;
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-
-        .teacher-info span {
-            color: var(--secondary);
-            font-weight: 600;
-            display: block;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-        }
-
-        .teacher-info p {
-            color: #4a5c53;
-        }
-
-        /* Awards & Gallery Page */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .gallery-item {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            height: 280px;
-            background: #2C3E35;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 20px rgba(44, 62, 53, 0.08);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.08);
-        }
-
-        /* Testimonials Page */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-
-        .testimonial-card {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(44, 62, 53, 0.06);
-            position: relative;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(44, 62, 53, 0.1);
-        }
-
-        .testimonial-card p {
-            font-style: italic;
-            margin-bottom: 20px;
-            color: #4a5c53;
-        }
-
-        .testimonial-card h4 {
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-
-        /* Contact Page */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-        }
-
-        .contact-info-box {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(44, 62, 53, 0.05);
-            transition: transform 0.4s ease;
-        }
-
-        .contact-info-box:hover {
-            transform: translateY(-3px);
-        }
-
-        .contact-info-box h3 {
-            font-size: 1.8rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-
-        .contact-info-box p {
-            margin-bottom: 15px;
-            color: #4a5c53;
-        }
-
-        .contact-form form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .contact-form input, .contact-form textarea {
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #cbd5cf;
-            background: var(--white);
-            font-family: inherit;
-            outline: none;
-            transition: var(--transition);
-        }
-
-        .contact-form input:focus, .contact-form textarea:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.15);
-        }
-
-        .contact-form button {
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .contact-form button:hover {
-            background-color: #3b6347;
-            transform: translateY(-2px);
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--accent);
-            color: var(--white);
-            text-align: center;
-            padding: 40px 10%;
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 968px) {
-            .about-grid, .contact-grid, .teacher-card, .testimonials-grid, .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 75px;
-                left: 0;
-                width: 100%;
-                background: var(--white);
-                padding: 20px 0;
-                text-align: center;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            }
-            .nav-links.active {
-                display: flex;
-            }
-            .menu-toggle {
-                display: block;
-            }
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
         }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="#home" class="logo">Agastya Yogshala</a>
-        <button class="menu-toggle" id="menu-btn">&#9776;</button>
-        <ul class="nav-links" id="nav-links">
-            <li><a href="#home" class="active">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#teacher">Teacher</a></li>
-            <li><a href="#awards">Awards & Gallery</a></li>
-            <li><a href="#testimonials">Testimonials</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+<div class="container">
+    <!-- SCREEN 1: CREATE QUIZ -->
+    <div id="screen-create" class="screen active">
+        <h1>Create Trust Quiz 🎭</h1>
+        <div class="form-group">
+            <label>Aapka Naam:</label>
+            <input type="text" id="creator-name" placeholder="Jaise: Hiren">
+        </div>
+        <div class="form-group">
+            <label>Custom Sawaal Add Karein:</label>
+            <div style="display: flex; gap: 8px;">
+                <input type="text" id="custom-q-input" placeholder="Jaise: Kya tu mujhse jhoot bolta hai?">
+                <button class="btn" style="width: auto; margin-top: 0; padding: 0 15px;" onclick="addQuestion()">Add</button>
+            </div>
+        </div>
+        <div id="questions-list" style="max-height: 150px; overflow-y: auto; margin-bottom: 15px;">
+            <!-- Added questions list -->
+        </div>
+        <button class="btn" onclick="generateQuizLink()">Generate Link 🚀</button>
+    </div>
 
-    <section id="home" class="reveal">
-        <div class="hero-content">
-            <h1>Agastya Yogshala</h1>
-            <p>Explore the timeless wisdom of yoga with certified masters. Restore harmony, flexibility, and deep inner peace.</p>
-            <div style="margin-top: 25px;">
-                <a href="#contact" class="cta-btn">Book Your Free Trial Today</a>
-            </div>
-        </div>
-    </section>
+    <!-- SCREEN 2: SHARE LINK -->
+    <div id="screen-share" class="screen">
+        <h1>Link Ready! 🔥</h1>
+        <p style="font-size: 14px; color: #666; margin-bottom: 10px; text-align: center;">Apne doston ko yeh link bhejo:</p>
+        <div class="link-box" id="generated-link-display"></div>
+        <button class="btn" onclick="copyLink()">Copy Link 📋</button>
+        <button class="btn" style="background: #25D366; margin-top: 8px;" onclick="shareOnWhatsApp()">Share on WhatsApp 💚</button>
+    </div>
 
-    <section id="about" class="reveal">
-        <div class="section-title">
-            <h2>About Agastya Yogshala</h2>
-            <p>Rooted in tradition, designed for modern wellness</p>
+    <!-- SCREEN 3: TAKE QUIZ (FOR FRIENDS) -->
+    <div id="screen-quiz" class="screen">
+        <h2 id="quiz-header-title">Trust Quiz</h2>
+        <div id="quiz-container">
+            <!-- Dynamic questions -->
         </div>
-        <div class="about-grid">
-            <div class="about-text">
-                <h3>Sanctuary of Peace & Healing</h3>
-                <p>Agastya Yogshala is more than just a yoga center; it is a sacred space dedicated to uniting the mind, body, and soul. Through structured classes tailored for all experience levels, we help practitioners unlock physical mobility and emotional calmness.</p>
-                <p>We specialize in therapeutic yoga addressing conditions like sinus, BP, asthma, joint pain, PCOS, and migraine relief through ancient holistic methods.</p>
-            </div>
-            <div class="about-img">
-                <img src="https://cdn.phototourl.com/member/2026-08-31-9e030983-5ca6-4a27-bb1b-8ed7fa9a6bbc.jpg" alt="Yoga Session">
-            </div>
-        </div>
-    </section>
+        <button class="btn" onclick="submitQuiz()">Submit Answers ✨</button>
+    </div>
 
-    <section id="teacher" style="background-color: #eaf2ed;" class="reveal">
-        <div class="section-title">
-            <h2>Meet Your Guide</h2>
-            <p>Learn directly from certified mastery</p>
+    <!-- SCREEN 4: RESULT CARD -->
+    <div id="screen-result" class="screen">
+        <div class="result-card">
+            <div class="avatar-placeholder">🧔🏻‍♂️</div>
+            <div class="result-title" id="res-name-display">Hiren doesn't</div>
+            <div class="result-badge"><span id="res-badge-text">trust you</span></div>
+            <p style="font-size: 13px; color: #888; margin-top: 15px;">🕵️‍♂️ searching my fake friends... 👀</p>
         </div>
-        <div class="teacher-card">
-            <div class="teacher-img">
-                <img src="https://cdn.phototourl.com/member/2026-08-31-fc96398c-2e84-4be1-9dcf-0c051602c6db.jpg" alt="Rishabh Sharma">
-            </div>
-            <div class="teacher-info">
-                <h3>Rishabh Sharma</h3>
-                <span>Certified Yoga Master & Founder</span>
-                <p>With years of deep practice and certification in advanced, therapeutic, and mobility yoga, Rishabh guides each student with personalized attention and detailed pose explanations, ensuring safe and profound growth.</p>
-            </div>
-        </div>
-    </section>
+        <button class="btn" onclick="location.reload()">Create Your Own Quiz 🎯</button>
+    </div>
+</div>
 
-    <section id="awards" class="reveal">
-        <div class="section-title">
-            <h2>Awards & Gallery</h2>
-            <p>Moments of dedication, community, and recognition</p>
-        </div>
-        <div class="gallery-grid">
-            <div class="gallery-item"><img src="https://cdn.phototourl.com/free/2026-08-31-b9222fda-d431-433d-aa13-646f9ad4bdc9.jpg" alt="Award & Gallery 1"></div>
-            <div class="gallery-item"><img src="https://cdn.phototourl.com/free/2026-08-31-ff6e0255-a490-4c7a-80b3-1487c7c71cc7.jpg" alt="Award & Gallery 2"></div>
-            <div class="gallery-item"><img src="https://cdn.phototourl.com/member/2026-08-31-3d447f66-a666-4962-b197-ece446d58b1c.jpg" alt="Award & Gallery 3"></div>
-            <div class="gallery-item"><img src="https://cdn.phototourl.com/free/2026-08-31-ea0b0f8f-b4e8-4839-a5fa-29feb58c7ce2.jpg" alt="Award & Gallery 4"></div>
-            <div class="gallery-item"><img src="https://cdn.phototourl.com/member/2026-08-31-27a1fab0-b480-43ae-a33e-2ccc146c574b.jpg" alt="Award & Gallery 5"></div>
-            <div class="gallery-item"><img src="https://cdn.phototourl.com/member/2026-08-31-8fe78a9c-db08-4c67-a45a-ac46d3cf89e5.jpg" alt="Award & Gallery 6"></div>
-        </div>
-    </section>
+<script>
+    let questions = [
+        "Kya tu mujh par trust karta hai?",
+        "Kya tune kabhi meri peeth peeche burai ki hai?"
+    ];
 
-    <section id="testimonials" style="background-color: #eaf2ed;" class="reveal">
-        <div class="section-title">
-            <h2>Voices of Transformation</h2>
-            <p>What our soulful community says about us</p>
-        </div>
-        <div class="testimonials-grid">
-            <div class="testimonial-card">
-                <p>"The atmosphere is so peaceful and positive. Personalized attention has made me feel much more flexible, stronger, and mentally refreshed."</p>
-                <h4>- Sunaina Sharma</h4>
-            </div>
-            <div class="testimonial-card">
-                <p>"Structured classes with clear pose explanations. My chronic joint pain has improved drastically since joining Agastya Yogshala."</p>
-                <h4>- Amit Ahlawat</h4>
-            </div>
-            <div class="testimonial-card">
-                <p>"Truly feels like a divine space. Rishabh Sir's guidance in therapeutic yoga brought absolute calm and relief to my daily routine."</p>
-                <h4>- Priya Malik</h4>
-            </div>
-        </div>
-    </section>
+    let quizData = {
+        name: "Hiren",
+        questions: []
+    };
 
-    <section id="contact" class="reveal">
-        <div class="section-title">
-            <h2>Connect With Us</h2>
-            <p>Take the first step toward inner awakening</p>
-        </div>
-        <div class="contact-grid">
-            <div class="contact-info-box">
-                <h3>Agastya Yogshala Branches</h3>
-                <p><strong>Branch 1:</strong> Railway Station Rd, Kath Mandi, Indira Market, Bahadurgarh, Haryana 124507</p>
-                <p><strong>Branch 2:</strong> Omaxe City, Bahadurgarh</p>
-                <p><strong>Phone / WhatsApp:</strong> +91 97292 92025</p>
-                <p><strong>Timing:</strong> Mon - Fri: 9:15 AM to 7:00 PM | Sat - Sun: Closed</p>
-            </div>
-            <div class="contact-form">
-                <form>
-                    <input type="text" placeholder="Your Name" required>
-                    <input type="tel" placeholder="Phone Number" required>
-                    <textarea rows="4" placeholder="Your Message or Inquiry" required></textarea>
-                    <button type="submit">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2026 Agastya Yogshala. All Rights Reserved. | Designed with natural aesthetics.</p>
-    </footer>
-
-    <script>
-        const menuBtn = document.getElementById('menu-btn');
-        const navLinks = document.getElementById('nav-links');
-
-        menuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+    function renderQuestionsList() {
+        const list = document.getElementById('questions-list');
+        list.innerHTML = '';
+        questions.forEach((q, index) => {
+            list.innerHTML += `
+                <div class="question-box">
+                    <span>${index + 1}. ${q}</span>
+                    <button class="delete-btn" onclick="removeQuestion(${index})">X</button>
+                </div>
+            `;
         });
+    }
 
-        // Close menu on link click for mobile
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('action');
-                navLinks.classList.remove('active');
-            });
-        });
+    function addQuestion() {
+        const input = document.getElementById('custom-q-input');
+        if(input.value.trim() !== '') {
+            questions.push(input.value.trim());
+            input.value = '';
+            renderQuestionsList();
+        }
+    }
 
-        // Scroll Reveal Animation Observer
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.15
-        };
+    function removeQuestion(index) {
+        questions.splice(index, 1);
+        renderQuestionsList();
+    }
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
+    function generateQuizLink() {
+        const name = document.getElementById('creator-name').value.trim();
+        if(!name) {
+            alert('Pehle apna naam toh daal bhai!');
+            return;
+        }
+        if(questions.length === 0) {
+            alert('Kam se kam ek sawaal toh add kar!');
+            return;
+        }
 
-        document.querySelectorAll('.reveal').forEach(section => {
-            observer.observe(section);
-        });
-    </script>
+        quizData.name = name;
+        quizData.questions = questions;
+
+        // Encode data into base64 url hash simulation
+        const encodedData = btoa(JSON.stringify(quizData));
+        const dummyLink = window.location.href.split('#')[0] + '#' + encodedData;
+
+        document.getElementById('generated-link-display').innerText = dummyLink;
+        switchScreen('screen-share');
+    }
+
+    function copyLink() {
+        const linkText = document.getElementById('generated-link-display').innerText;
+        navigator.clipboard.writeText(linkText);
+        alert('Link copied to clipboard! Ab kahin bhi paste kar de.');
+    }
+
+    function shareOnWhatsApp() {
+        const linkText = document.getElementById('generated-link-display').innerText;
+        window.open(`https://api.whatsapp.com/send?text=Dekh le bhai mujh par kitna trust hai tera? Is link pe click kar: ${linkText}`, '_blank');
+    }
+
+    function switchScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(screenId).classList.add('active');
+    }
+
+    // Check if URL has hash data when someone opens the link
+    window.onload = function() {
+        renderQuestionsList();
+        if(window.location.hash) {
+            try {
+                const decodedData = JSON.parse(atob(window.location.hash.substring(1)));
+                quizData = decodedData;
+                document.getElementById('quiz-header-title').innerText = `${quizData.name}'s Trust Quiz`;
+                
+                const container = document.getElementById('quiz-container');
+                container.innerHTML = '';
+                quizData.questions.forEach((q, i) => {
+                    container.innerHTML += `
+                        <div class="form-group">
+                            <label>${i + 1}. ${q}</label>
+                            <input type="text" placeholder="Apna jawab likhein..." class="friend-answer" required>
+                        </div>
+                    `;
+                });
+                switchScreen('screen-quiz');
+            } catch(e) {
+                console.error(e);
+            }
+        }
+    };
+
+    function submitQuiz() {
+        document.getElementById('res-name-display').innerText = `${quizData.name} doesn't`;
+        document.getElementById('res-badge-text').innerText = 'trust you 💀';
+        switchScreen('screen-result');
+    }
+</script>
 
 </body>
 </html>
