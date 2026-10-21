@@ -3,265 +3,395 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trust Quiz - Custom Trend</title>
+    <title>Ultimate Trust & Vibe Quiz</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
+
         body {
-            background: linear-gradient(135deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            background: #000;
+            color: #fff;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
         }
-        .container {
-            background: #ffffff;
+
+        .app-container {
             width: 100%;
             max-width: 420px;
-            border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background: #121212;
+            border-radius: 28px;
+            border: 1px solid #262626;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+            padding: 24px 20px;
             overflow: hidden;
-            padding: 30px 20px;
+            position: relative;
         }
+
         .screen {
             display: none;
+            animation: fadeIn 0.3s ease-in-out;
         }
+
         .screen.active {
             display: block;
         }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         h1, h2 {
+            font-size: 22px;
             text-align: center;
-            color: #262626;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .input-group {
             margin-bottom: 20px;
         }
-        .form-group {
-            margin-bottom: 15px;
-        }
+
         label {
             display: block;
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 5px;
-            font-weight: 600;
+            font-size: 13px;
+            color: #a8a8a8;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        input[type="text"], textarea {
+
+        input[type="text"], select {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #dbdbdb;
-            border-radius: 10px;
-            font-size: 14px;
+            padding: 14px;
+            background: #1c1c1c;
+            border: 1px solid #333;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 15px;
             outline: none;
-            background: #fafafa;
+            transition: border-color 0.2s;
         }
-        input[type="text"]:focus, textarea:focus {
+
+        input[type="text"]:focus {
             border-color: #0095f6;
-            background: #fff;
         }
+
         .btn {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             background: #0095f6;
+            color: #fff;
             border: none;
-            color: white;
-            font-weight: bold;
-            border-radius: 10px;
-            cursor: pointer;
+            border-radius: 12px;
+            font-weight: 600;
             font-size: 15px;
+            cursor: pointer;
             margin-top: 10px;
+            transition: opacity 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn-secondary {
+            background: #262626;
+            color: #fff;
+        }
+
+        .btn-help {
+            background: #8e44ad;
+            color: #fff;
+        }
+
+        .choice-card {
+            background: #1c1c1c;
+            border: 1px solid #333;
+            padding: 18px;
+            border-radius: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .choice-card:hover {
+            transform: translateY(-2px);
+            border-color: #0095f6;
+        }
+
+        .choice-title {
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .choice-desc {
+            font-size: 13px;
+            color: #8e8e8e;
+        }
+
+        /* GIF & Question Display Area */
+        .question-card {
+            background: #1c1c1c;
+            border-radius: 18px;
+            padding: 16px;
+            text-align: center;
+            margin-bottom: 15px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .gif-container {
+            width: 100%;
+            height: 180px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 15px;
+            background: #262626;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gif-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .question-text {
+            font-size: 17px;
+            font-weight: 600;
+            line-height: 1.4;
+            color: #fff;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .option-btn {
+            background: #262626;
+            border: 1px solid #3d3d3d;
+            padding: 12px;
+            border-radius: 10px;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: center;
             transition: background 0.2s;
         }
-        .btn:hover {
-            background: #0077c2;
+
+        .option-btn:hover {
+            background: #333;
         }
-        .question-box {
-            background: #f8f9fa;
-            padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .question-box span {
-            font-size: 14px;
-            color: #333;
-        }
-        .delete-btn {
-            background: #ed4956;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-        .result-card {
-            background: #fff;
-            border-radius: 20px;
-            padding: 20px;
-            text-align: center;
-            border: 2px solid #eee;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
-        }
-        .avatar-placeholder {
-            font-size: 50px;
-            margin-bottom: 10px;
-        }
-        .result-title {
-            font-size: 22px;
-            font-weight: 800;
-            color: #262626;
-            margin: 10px 0;
-        }
-        .result-badge {
-            display: inline-block;
-            background: #8e44ad;
-            color: white;
-            padding: 4px 12px;
-            border-radius: 8px;
-            font-weight: bold;
-            transform: rotate(-2deg);
-        }
-        .link-box {
-            background: #efefef;
-            padding: 10px;
-            border-radius: 8px;
-            word-break: break-all;
-            font-size: 13px;
-            color: #555;
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #262626;
+            border-radius: 2px;
             margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #0095f6;
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .flex-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .flex-buttons .btn {
+            flex: 1;
+        }
+
+        .modal-help {
+            background: #1c1c1c;
+            border: 1px solid #444;
+            padding: 16px;
+            border-radius: 16px;
+            margin-top: 15px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <!-- SCREEN 1: CREATE QUIZ -->
-    <div id="screen-create" class="screen active">
-        <h1>Create Trust Quiz 🎭</h1>
-        <div class="form-group">
-            <label>Aapka Naam:</label>
-            <input type="text" id="creator-name" placeholder="Jaise: Hiren">
+<div class="app-container">
+    <!-- STEP 1: ENTER USER NAME -->
+    <div id="screen-name" class="screen active">
+        <h1>Welcome! 🔥</h1>
+        <div class="input-group">
+            <label>Enter Your Name</label>
+            <input type="text" id="user-name-input" placeholder="e.g. Alex, Hiren, Sarah">
         </div>
-        <div class="form-group">
-            <label>Custom Sawaal Add Karein:</label>
-            <div style="display: flex; gap: 8px;">
-                <input type="text" id="custom-q-input" placeholder="Jaise: Kya tu mujhse jhoot bolta hai?">
-                <button class="btn" style="width: auto; margin-top: 0; padding: 0 15px;" onclick="addQuestion()">Add</button>
+        <button class="btn" onclick="submitName()">Next Step 🚀</button>
+    </div>
+
+    <!-- STEP 2: CHOOSE QUIZ CREATION MODE -->
+    <div id="screen-mode" class="screen">
+        <h2>Choose Creation Mode</h2>
+        <div class="choice-card" onclick="selectMode('template')">
+            <div class="choice-title">✨ Template Questions</div>
+            <div class="choice-desc">Pick from 25 trending friends, crush & nature questions with matching GIFs.</div>
+        </div>
+        <div class="choice-card" onclick="selectMode('custom')">
+            <div class="choice-title">🛠️ Custom Questions</div>
+            <div class="choice-desc">Write your own questions & correct answers with auto-generated GIFs.</div>
+        </div>
+    </div>
+
+    <!-- STEP 3A: TEMPLATE QUESTION BUILDER (POP-UP ONE BY ONE) -->
+    <div id="screen-template-builder" class="screen">
+        <div class="progress-bar"><div class="progress-fill" id="template-progress"></div></div>
+        <div class="question-card">
+            <div class="gif-container" id="template-gif-box">
+                <span style="color:#aaa;">Loading GIF...</span>
+            </div>
+            <div class="question-text" id="template-q-text">Question goes here?</div>
+        </div>
+        <div class="flex-buttons">
+            <button class="btn btn-secondary" onclick="nextTemplateQuestion(false)">Skip ⏭️</button>
+            <button class="btn" onclick="nextTemplateQuestion(true)">Add Question ➕</button>
+        </div>
+    </div>
+
+    <!-- STEP 3B: CUSTOM QUESTION BUILDER -->
+    <div id="screen-custom-builder" class="screen">
+        <h2 id="custom-count-header">Add Question (0/10)</h2>
+        <div class="input-group">
+            <label>Question Text</label>
+            <input type="text" id="custom-q-text" placeholder="e.g., Do I ever lie to you?">
+        </div>
+        <div class="input-group">
+            <label>Correct Answer Keyword (for GIF lookup)</label>
+            <input type="text" id="custom-a-text" placeholder="e.g., Never, Always, Secret">
+        </div>
+        <button class="btn" onclick="addCustomQuestion()">Add Question ➕</button>
+        <button class="btn btn-help" onclick="triggerHelpSuggestion()">💡 Need Ideas? (HELP)</button>
+
+        <!-- HELP SUGGESTION MODAL / AREA -->
+        <div id="help-modal" class="modal-help" style="display: none;">
+            <label style="color:#0095f6;">Suggested Template Question:</label>
+            <p id="help-q-text" style="font-size:14px; margin-bottom:10px;"></p>
+            <div class="flex-buttons">
+                <button class="btn btn-secondary" style="padding:8px;" onclick="skipHelpQuestion()">Next Idea ⏭️</button>
+                <button class="btn" style="padding:8px;" onclick="acceptHelpQuestion()">Add Suggestion ➕</button>
             </div>
         </div>
-        <div id="questions-list" style="max-height: 150px; overflow-y: auto; margin-bottom: 15px;">
-            <!-- Added questions list -->
-        </div>
-        <button class="btn" onclick="generateQuizLink()">Generate Link 🚀</button>
+
+        <button class="btn btn-secondary" style="margin-top:20px;" onclick="finishCustomQuiz()">Finish & Create Link 🚀</button>
     </div>
 
-    <!-- SCREEN 2: SHARE LINK -->
+    <!-- STEP 4: SHARE QUIZ LINK -->
     <div id="screen-share" class="screen">
-        <h1>Link Ready! 🔥</h1>
-        <p style="font-size: 14px; color: #666; margin-bottom: 10px; text-align: center;">Apne doston ko yeh link bhejo:</p>
-        <div class="link-box" id="generated-link-display"></div>
-        <button class="btn" onclick="copyLink()">Copy Link 📋</button>
-        <button class="btn" style="background: #25D366; margin-top: 8px;" onclick="shareOnWhatsApp()">Share on WhatsApp 💚</button>
-    </div>
-
-    <!-- SCREEN 3: TAKE QUIZ (FOR FRIENDS) -->
-    <div id="screen-quiz" class="screen">
-        <h2 id="quiz-header-title">Trust Quiz</h2>
-        <div id="quiz-container">
-            <!-- Dynamic questions -->
+        <h1>Quiz Ready! 🔥</h1>
+        <p style="text-align: center; color: #a8a8a8; font-size: 14px; margin-bottom: 20px;">Share this link with your friends to test their trust!</p>
+        <div class="input-group">
+            <input type="text" id="final-share-link" readonly>
         </div>
-        <button class="btn" onclick="submitQuiz()">Submit Answers ✨</button>
+        <button class="btn" onclick="copyShareLink()">Copy Quiz Link 📋</button>
+        <button class="btn btn-secondary" onclick="location.reload()">Build Another Quiz 🔄</button>
     </div>
 
-    <!-- SCREEN 4: RESULT CARD -->
+    <!-- STEP 5: TAKING THE QUIZ (FOR FRIENDS) -->
+    <div id="screen-play-quiz" class="screen">
+        <h2 id="play-quiz-header">Trust Quiz</h2>
+        <div class="progress-bar"><div class="progress-fill" id="play-progress"></div></div>
+        <div class="question-card">
+            <div class="gif-container" id="play-gif-box">
+                <span style="color:#aaa;">Loading GIF...</span>
+            </div>
+            <div class="question-text" id="play-q-text">Question?</div>
+        </div>
+        <div class="options-grid" id="play-options-container">
+            <!-- Dynamic Answer Buttons -->
+        </div>
+    </div>
+
+    <!-- STEP 6: QUIZ RESULT DISPLAY -->
     <div id="screen-result" class="screen">
-        <div class="result-card">
-            <div class="avatar-placeholder">🧔🏻‍♂️</div>
-            <div class="result-title" id="res-name-display">Hiren doesn't</div>
-            <div class="result-badge"><span id="res-badge-text">trust you</span></div>
-            <p style="font-size: 13px; color: #888; margin-top: 15px;">🕵️‍♂️ searching my fake friends... 👀</p>
+        <div class="question-card" style="padding:30px 15px;">
+            <div style="font-size: 50px; margin-bottom: 10px;">🎭</div>
+            <h1 id="result-title">Quiz Completed!</h1>
+            <p id="result-subtitle" style="color:#a8a8a8; font-size:15px; margin-top:10px;"></p>
         </div>
-        <button class="btn" onclick="location.reload()">Create Your Own Quiz 🎯</button>
+        <button class="btn" onclick="location.href=window.location.origin + window.location.pathname">Create Your Own Quiz 🎯</button>
     </div>
 </div>
 
 <script>
-    let questions = [
-        "Kya tu mujh par trust karta hai?",
-        "Kya tune kabhi meri peeth peeche burai ki hai?"
+    // 25 Pre-defined Relatable Template Questions (Friends, Crush, Nature, Vibe)
+    const TEMPLATE_QUESTIONS = [
+        { q: "Do you think I can keep a secret?", keyword: "secret" },
+        { q: "Would you trust me with your phone password?", keyword: "password" },
+        { q: "Do you think I have a secret crush on someone?", keyword: "crush" },
+        { q: "If we got arrested, who would be the reason?", keyword: "trouble" },
+        { q: "Am I an introvert or an extrovert?", keyword: "personality" },
+        { q: "Would you take a bullet for me?", keyword: "hero" },
+        { q: "Do I lie well or am I terrible at it?", keyword: "lying" },
+        { q: "Am I emotional or heartless?", keyword: "crying" },
+        { q: "Would you give me your food if I was hungry?", keyword: "food" },
+        { q: "Do you think I am fake to people?", keyword: "fake" },
+        { q: "Who is more dramatic between us?", keyword: "drama" },
+        { q: "Have you ever lied to me?", keyword: "suspicious" },
+        { q: "Do you think I am a good listener?", keyword: "listen" },
+        { q: "Am I impulsive or a overthinker?", keyword: "thinking" },
+        { q: "Would you go on a late-night road trip with me?", keyword: "roadtrip" },
+        { q: "Do I text fast or take 3 business days to reply?", keyword: "texting" },
+        { q: "Do you think I am possessive about my friends?", keyword: "jealous" },
+        { q: "Am I a morning person or a night owl?", keyword: "sleep" },
+        { q: "Would you trust my fashion advice?", keyword: "fashion" },
+        { q: "Am I the funny friend or the serious one?", keyword: "laugh" },
+        { q: "Do you think I am easy to forgive?", keyword: "sorry" },
+        { q: "Would you tell me if I had something in my teeth?", keyword: "teeth" },
+        { q: "Do I fall in love too easily?", keyword: "romance" },
+        { q: "Am I a chaotic person or calm?", keyword: "chaos" },
+        { q: "Are we going to be friends 10 years from now?", keyword: "forever" }
     ];
 
-    let quizData = {
-        name: "Hiren",
-        questions: []
-    };
+    let creatorName = "";
+    let selectedQuestions = [];
+    let currentTemplateIndex = 0;
+    let customQuestionsList = [];
+    let helpIndex = 0;
+    let playQuizIndex = 0;
+    let playerAnswers = [];
+    let activeQuizData = null;
 
-    function renderQuestionsList() {
-        const list = document.getElementById('questions-list');
-        list.innerHTML = '';
-        questions.forEach((q, index) => {
-            list.innerHTML += `
-                <div class="question-box">
-                    <span>${index + 1}. ${q}</span>
-                    <button class="delete-btn" onclick="removeQuestion(${index})">X</button>
-                </div>
-            `;
-        });
-    }
-
-    function addQuestion() {
-        const input = document.getElementById('custom-q-input');
-        if(input.value.trim() !== '') {
-            questions.push(input.value.trim());
-            input.value = '';
-            renderQuestionsList();
+    // Direct Giphy Fallback Engine
+    async function fetchGifUrl(keyword) {
+        try {
+            const res = await fetch(`https://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q=${encodeURIComponent(keyword)}&limit=1`);
+            const data = await res.json();
+            if (data.data && data.data.length > 0) {
+                return data.data[0].images.fixed_height.url;
+            }
+        } catch (e) {
+            console.log("GIF load fallback");
         }
-    }
-
-    function removeQuestion(index) {
-        questions.splice(index, 1);
-        renderQuestionsList();
-    }
-
-    function generateQuizLink() {
-        const name = document.getElementById('creator-name').value.trim();
-        if(!name) {
-            alert('Pehle apna naam toh daal bhai!');
-            return;
-        }
-        if(questions.length === 0) {
-            alert('Kam se kam ek sawaal toh add kar!');
-            return;
-        }
-
-        quizData.name = name;
-        quizData.questions = questions;
-
-        // Encode data into base64 url hash simulation
-        const encodedData = btoa(JSON.stringify(quizData));
-        const dummyLink = window.location.href.split('#')[0] + '#' + encodedData;
-
-        document.getElementById('generated-link-display').innerText = dummyLink;
-        switchScreen('screen-share');
-    }
-
-    function copyLink() {
-        const linkText = document.getElementById('generated-link-display').innerText;
-        navigator.clipboard.writeText(linkText);
-        alert('Link copied to clipboard! Ab kahin bhi paste kar de.');
-    }
-
-    function shareOnWhatsApp() {
-        const linkText = document.getElementById('generated-link-display').innerText;
-        window.open(`https://api.whatsapp.com/send?text=Dekh le bhai mujh par kitna trust hai tera? Is link pe click kar: ${linkText}`, '_blank');
+        return "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExdWkxd3c1MnN2OHBhNDNkd3g5bmV0bjExMWFvdmE0MmwxdXpwZ2ptNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7TKsjRrfIPjeiVyM/giphy.gif";
     }
 
     function switchScreen(screenId) {
@@ -269,37 +399,228 @@
         document.getElementById(screenId).classList.add('active');
     }
 
-    // Check if URL has hash data when someone opens the link
-    window.onload = function() {
-        renderQuestionsList();
-        if(window.location.hash) {
+    function submitName() {
+        const val = document.getElementById('user-name-input').value.trim();
+        if (!val) {
+            alert("Please enter your name first!");
+            return;
+        }
+        creatorName = val;
+        switchScreen('screen-mode');
+    }
+
+    function selectMode(mode) {
+        if (mode === 'template') {
+            currentTemplateIndex = 0;
+            selectedQuestions = [];
+            loadTemplateQuestionUI();
+            switchScreen('screen-template-builder');
+        } else {
+            customQuestionsList = [];
+            updateCustomCountHeader();
+            switchScreen('screen-custom-builder');
+        }
+    }
+
+    /* TEMPLATE FLOW */
+    async function loadTemplateQuestionUI() {
+        if (currentTemplateIndex >= TEMPLATE_QUESTIONS.length) {
+            // Loop back or finish
+            currentTemplateIndex = 0;
+        }
+
+        const qObj = TEMPLATE_QUESTIONS[currentTemplateIndex];
+        document.getElementById('template-q-text').innerText = qObj.q;
+        
+        // Progress bar calculation
+        const pct = ((currentTemplateIndex + 1) / TEMPLATE_QUESTIONS.length) * 100;
+        document.getElementById('template-progress').style.width = pct + "%";
+
+        const gifBox = document.getElementById('template-gif-box');
+        gifBox.innerHTML = `<span style="color:#aaa;">Loading GIF...</span>`;
+        
+        const gifUrl = await fetchGifUrl(qObj.keyword);
+        gifBox.innerHTML = `<img src="${gifUrl}" alt="GIF">`;
+    }
+
+    async function nextTemplateQuestion(addIt) {
+        const qObj = TEMPLATE_QUESTIONS[currentTemplateIndex];
+        if (addIt) {
+            const gifUrl = await fetchGifUrl(qObj.keyword);
+            selectedQuestions.push({
+                q: qObj.q,
+                gif: gifUrl,
+                options: ["Yes", "No", "Maybe", "Definitely"]
+            });
+        }
+
+        currentTemplateIndex++;
+        if (currentTemplateIndex >= TEMPLATE_QUESTIONS.length) {
+            if (selectedQuestions.length === 0) {
+                alert("You skipped all questions! Looping back questions...");
+                currentTemplateIndex = 0;
+                loadTemplateQuestionUI();
+            } else {
+                finishAndBuildLink();
+            }
+        } else {
+            loadTemplateQuestionUI();
+        }
+    }
+
+    /* CUSTOM QUESTION & HELP FLOW */
+    function updateCustomCountHeader() {
+        document.getElementById('custom-count-header').innerText = `Add Questions (${customQuestionsList.length}/10)`;
+    }
+
+    async function addCustomQuestion() {
+        const qVal = document.getElementById('custom-q-text').value.trim();
+        const aVal = document.getElementById('custom-a-text').value.trim();
+
+        if (!qVal || !aVal) {
+            alert("Please fill in both Question and Answer Keyword!");
+            return;
+        }
+
+        const gifUrl = await fetchGifUrl(aVal);
+        customQuestionsList.push({
+            q: qVal,
+            gif: gifUrl,
+            options: [aVal, "No Way", "100%", "Not Sure"]
+        });
+
+        document.getElementById('custom-q-text').value = "";
+        document.getElementById('custom-a-text').value = "";
+        updateCustomCountHeader();
+        alert("Question Added!");
+    }
+
+    function triggerHelpSuggestion() {
+        document.getElementById('help-modal').style.display = 'block';
+        showHelpQuestion();
+    }
+
+    function showHelpQuestion() {
+        if (helpIndex >= TEMPLATE_QUESTIONS.length) {
+            helpIndex = 0; // Auto Loop
+        }
+        document.getElementById('help-q-text').innerText = TEMPLATE_QUESTIONS[helpIndex].q;
+    }
+
+    function skipHelpQuestion() {
+        helpIndex++;
+        showHelpQuestion();
+    }
+
+    async function acceptHelpQuestion() {
+        const qObj = TEMPLATE_QUESTIONS[helpIndex];
+        const gifUrl = await fetchGifUrl(qObj.keyword);
+        customQuestionsList.push({
+            q: qObj.q,
+            gif: gifUrl,
+            options: ["Yes", "No", "Always", "Never"]
+        });
+
+        helpIndex++;
+        updateCustomCountHeader();
+        document.getElementById('help-modal').style.display = 'none';
+        alert("Suggested Question Added!");
+    }
+
+    function finishCustomQuiz() {
+        if (customQuestionsList.length === 0) {
+            alert("Please add at least one question!");
+            return;
+        }
+        selectedQuestions = customQuestionsList;
+        finishAndBuildLink();
+    }
+
+    /* BUILD & SHARE QUIZ */
+    function finishAndBuildLink() {
+        const quizPayload = {
+            creator: creatorName,
+            questions: selectedQuestions
+        };
+
+        const encoded = btoa(encodeURIComponent(JSON.stringify(quizPayload)));
+        const shareUrl = window.location.origin + window.location.pathname + "#quiz=" + encoded;
+
+        document.getElementById('final-share-link').value = shareUrl;
+        switchScreen('screen-share');
+    }
+
+    function copyShareLink() {
+        const linkInput = document.getElementById('final-share-link');
+        linkInput.select();
+        navigator.clipboard.writeText(linkInput.value);
+        alert("Quiz link copied to clipboard! Share it on WhatsApp or Instagram stories.");
+    }
+
+    /* PLAY QUIZ FLOW FOR FRIENDS */
+    function checkUrlForQuiz() {
+        const hash = window.location.hash;
+        if (hash && hash.includes("#quiz=")) {
             try {
-                const decodedData = JSON.parse(atob(window.location.hash.substring(1)));
-                quizData = decodedData;
-                document.getElementById('quiz-header-title').innerText = `${quizData.name}'s Trust Quiz`;
-                
-                const container = document.getElementById('quiz-container');
-                container.innerHTML = '';
-                quizData.questions.forEach((q, i) => {
-                    container.innerHTML += `
-                        <div class="form-group">
-                            <label>${i + 1}. ${q}</label>
-                            <input type="text" placeholder="Apna jawab likhein..." class="friend-answer" required>
-                        </div>
-                    `;
-                });
-                switchScreen('screen-quiz');
-            } catch(e) {
-                console.error(e);
+                const rawBase64 = hash.replace("#quiz=", "");
+                const decodedJson = decodeURIComponent(atob(rawBase64));
+                activeQuizData = JSON.parse(decodedJson);
+
+                if (activeQuizData && activeQuizData.questions.length > 0) {
+                    playQuizIndex = 0;
+                    playerAnswers = [];
+                    document.getElementById('play-quiz-header').innerText = `${activeQuizData.creator}'s Trust Quiz`;
+                    renderPlayQuestion();
+                    switchScreen('screen-play-quiz');
+                }
+            } catch (e) {
+                console.error("Invalid quiz URL payload", e);
             }
         }
-    };
+    }
 
-    function submitQuiz() {
-        document.getElementById('res-name-display').innerText = `${quizData.name} doesn't`;
-        document.getElementById('res-badge-text').innerText = 'trust you 💀';
+    function renderPlayQuestion() {
+        const qObj = activeQuizData.questions[playQuizIndex];
+        document.getElementById('play-q-text').innerText = qObj.q;
+
+        const pct = ((playQuizIndex + 1) / activeQuizData.questions.length) * 100;
+        document.getElementById('play-progress').style.width = pct + "%";
+
+        const gifBox = document.getElementById('play-gif-box');
+        gifBox.innerHTML = `<img src="${qObj.gif}" alt="GIF">`;
+
+        const optionsBox = document.getElementById('play-options-container');
+        optionsBox.innerHTML = "";
+
+        qObj.options.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = "option-btn";
+            btn.innerText = opt;
+            btn.onclick = () => selectAnswer(opt);
+            optionsBox.appendChild(btn);
+        });
+    }
+
+    function selectAnswer(ans) {
+        playerAnswers.push(ans);
+        playQuizIndex++;
+
+        if (playQuizIndex >= activeQuizData.questions.length) {
+            showResultScreen();
+        } else {
+            renderPlayQuestion();
+        }
+    }
+
+    function showResultScreen() {
+        document.getElementById('result-title').innerText = `${activeQuizData.creator} trusts you! 🎉`;
+        document.getElementById('result-subtitle').innerText = `You answered all ${activeQuizData.questions.length} questions! Your vibe match is officially logged.`;
         switchScreen('screen-result');
     }
+
+    window.onload = function() {
+        checkUrlForQuiz();
+    };
 </script>
 
 </body>
